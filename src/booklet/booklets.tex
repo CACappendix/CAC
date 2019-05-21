@@ -1,0 +1,262 @@
+% options:
+%\def\LETTERPAPER{} % use letter page
+%\def\AFOURPAPER{} % use A4 paper
+%otherwise standalone environment
+
+\ifdefined\LETTERPAPER
+\documentclass{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\pagestyle{empty}
+\def\FULLPAGE{}
+\else
+    \ifdefined\AFOURPAPER
+	\documentclass{article}
+    \usepackage[a4paper,margin=1in]{geometry}
+	\pagestyle{empty}
+	\def\FULLPAGE{}
+	\else
+	\documentclass{standalone}
+	\fi
+\fi
+
+\input{booklet}
+
+\ifdefined\FULLPAGE{}
+\else
+	\standaloneenv{doublepage}
+\fi
+
+
+\begin{document}
+
+%Outside Appendix A booklet
+\begin{doublepage}
+	% Title page (on the right)
+	\frontpage{\BOOKLETHALFWIDTH}{0}{\appendixA}
+
+	% back page
+	\drawbodytext{\BOOKLETPADDING}{\BOOKLETPADDING}{\BOOKLETHALFWIDTH-2*\BOOKLETPADDING}{%
+		{\bookletfontsmall
+		Cards Against Cryptography - Appendix A is an independently made extension for Cards Against Cryptography 
+		which itself is shamelessly based on Cards Against Humanity, which was released under a Creative Commons BY-NC-SA 2.0 license.}
+
+		\medskip
+
+		{\bookletfontsmall
+		Cards Against Cryptography - Appendix A is released under the same license, which means you can use, remix, and share the game for free, but cannot sell it.}
+
+		\bigskip
+
+		\includegraphics[width=0.25in]{icons/cc}
+		\includegraphics[width=0.25in]{icons/by}
+		\includegraphics[width=0.25in]{icons/nc}
+		\includegraphics[width=0.25in]{icons/sa}
+
+		\bigskip
+
+		{\bookletfontsmall
+		The source code and printable PDF versions are available online at https://github.com/CACappendix/.  
+		}
+
+		\bigskip
+
+		{\bookletfonttiny
+		Version \circlef{\version} 
+		}
+
+	};
+\end{doublepage}
+
+
+\begin{doublepage}
+	
+	% first page
+	\drawbodytext{\BOOKLETPADDING}{\BOOKLETPADDING}{\BOOKLETHALFWIDTH-2*\BOOKLETPADDING}{%
+		
+		{\bookletfont
+			\textbf{Basic Rules}
+		}
+		
+		\smallskip
+		
+		{\bookletfontsmall
+	The basic rules are equivalent to the Cards Against Cryptography rules and are available online at\\[1.1ex] https://github.com/CardsAgainst\\Cryptography/.  
+		}
+	
+		\smallskip	
+		{\hrline}
+		
+		\medskip
+		
+		{\bookletfontsmall
+			\drawN{${n}$} 
+		}	
+
+
+		\smallskip
+		
+		{\bookletfontsmall
+		Some cards say {\bookletfonttiny{PICK}} {$n$} on the bottom. 
+		}
+
+		\smallskip
+		
+		{\bookletfontsmall
+		To answer these, each player draws $n$ additional white cards from the white pile, 
+		and plays a combination of $n+1$  cards. 
+		Cards should be played in the order the Session Chair should read them --order matters. 
+		}
+
+		\smallskip
+		
+		{\bookletfontsmall
+		 In the case of mutually distrustful players, card-based cryptography techniques can be used to combat malicious behaviors. 
+		 }
+
+{\hrline}
+		
+};
+% second page
+\drawbodytext{\BOOKLETHALFWIDTH+\BOOKLETPADDING}{\BOOKLETPADDING}{\BOOKLETHALFWIDTH-2*\BOOKLETPADDING}{%
+%		\hrline
+		{\bookletfont
+			\textbf{University Regulations}
+		}
+		
+		\medskip
+			
+		{\bookletfontsmall
+		\textbf{Virtual Random Fellow}\textsuperscript{1}: 
+		Every round, pick the appropriate number of white cards from the pile and place them into play. 
+		These cards belong to the VRF --a simulated player-- and if they win the game, every player must admit that their submission did not improve the state of the art. 
+		}	
+		
+		\medskip
+		
+		{\bookletfontsmall
+			\textbf{Cryptographic Haikus}:  Don't need to follow the 5-7-5 form. They just have to be read dramatically.
+		}
+		
+		\medskip
+		
+		{\bookletfontsmall
+			\textbf{Reboot}: At any time, payers may trade in one won black card to return as many white cards as they'd like to the deck and draw back up to 7.
+		}
+	\bigskip
+	\medskip
+	\smallskip
+	
+	\hrule width0.3\textwidth
+	\smallskip
+		{	
+		\bookletfonttiny
+		\textsuperscript{1}\emph{This variant assumes semi-honest players.}
+	}
+	
+	};
+\end{doublepage}
+
+%Outside Appendix B booklet
+\begin{doublepage}
+	% Title page (on the right)
+	\frontpage{\BOOKLETHALFWIDTH}{0}{\appendixB}
+	
+	
+	% back page
+	\drawbodytext{\BOOKLETPADDING}{\BOOKLETPADDING}{\BOOKLETHALFWIDTH-2*\BOOKLETPADDING}{%
+		{\bookletfontsmall
+			Cards Against Cryptography - Appendix B is an independently made extension for Cards Against Cryptography 
+			which itself is shamelessly based on Cards Against Humanity, which was released under a Creative Commons BY-NC-SA 2.0 license.}
+		
+		\medskip
+		
+		{\bookletfontsmall
+			Cards Against Cryptography - Appendix B is released under the same license, which means you can use, remix, and share the game for free, but cannot sell it.}
+		
+		\bigskip
+		
+		\includegraphics[width=0.25in]{icons/cc}
+		\includegraphics[width=0.25in]{icons/by}
+		\includegraphics[width=0.25in]{icons/nc}
+		\includegraphics[width=0.25in]{icons/sa}
+		
+		\bigskip
+		
+		{\bookletfontsmall
+		The source code and printable PDF versions are available online at https://github.com/CACappendix/.  
+		}
+		
+		\medskip
+		
+		{\bookletfonttiny
+		Version \circlef{\version}
+		}
+		
+	};
+\end{doublepage}
+
+\begin{doublepage}
+	
+	% first page
+	\drawbodytext{\BOOKLETPADDING}{\BOOKLETPADDING}{\BOOKLETHALFWIDTH-2*\BOOKLETPADDING}{%
+		
+		{\bookletfont
+			\textbf{Basic Rules}
+		}
+		
+		\smallskip
+		
+		{\bookletfontsmall
+	The basic rules are equivalent to the Cards Against Cryptography rules and are available online at\\[1.1ex] https://github.com/CardsAgainst\\Cryptography/.  
+		}
+		
+		\hrline
+		\medskip
+		
+				{\bookletfont
+			\textbf{Blockchain cards}
+		} 
+	
+	
+	\medskip
+		{\bookletfontsmall
+		\textbf{Forks}: In case more than one blockchain card is played, players are requested to recognized their played cards.  
+	}
+
+
+\medskip 
+			{\bookletfontsmall
+		\textbf{DAG Chain}: In case more than one blockchain card is played, all players who played blockchain cards get a victory card. 
+	}
+	\hrline
+\smallskip
+
+		
+	};
+	% second page
+	\drawbodytext{\BOOKLETHALFWIDTH+\BOOKLETPADDING}{\BOOKLETPADDING}{\BOOKLETHALFWIDTH-2*\BOOKLETPADDING}{%
+		
+		
+		{\bookletfont
+			\textbf{Alternative Mining Rules}
+		} 
+		
+		
+		\medskip
+		{\bookletfontsmall
+			\textbf{Gambling}: In case of ties, you can bet one of your black cards (from your victory pile) to play an additional white card.
+			If you win, you get your point back; otherwise your point goes to the winner.	
+		}
+	
+	\medskip
+		
+			{\bookletfontsmall
+			\textbf{Byzantine Agreement}: In the absence of a trusted Session Chair the consensus protocol applies. 
+			Each player picks their favorite card each round. The card with the most votes wins the round.
+		}
+
+		
+	};
+\end{doublepage}
+
+\end{document}

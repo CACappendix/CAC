@@ -1,0 +1,75 @@
+% options:
+%\def\BLEEDAREA{} % put bleed area around image as required for printing at makeplayingcards.com https://www.makeplayingcards.com/dl/templates/us_game_deck.pdf
+%\def\LINES{} % put lines for cutting
+%\def\SAFEAREA{} % draw safe area for content
+
+\input{../common}
+
+%Default measures for USCards with bleedmargins for printing at makeplayingcards.com
+%Check before printing!
+\providecommand{\CARDWIDTH}{2.2in}
+\ifdefined\SQUARECARDS
+\providecommand{\CARDHEIGHT}{\CARDWIDTH}
+\else
+\providecommand{\CARDHEIGHT}{3.43in}
+\fi
+\providecommand{\BLEEDMARGIN}{0.12in}
+\providecommand{\CARDPADDING}{0.12in}%for safe area
+\providecommand{\HEADERHEIGHT}{0.07in}
+\providecommand{\TEXTMARGIN}{0.1in}
+\providecommand{\FOOTERHEIGHT}{0.40in}
+\pgfdeclarelayer{bg}    % declare background layer
+\pgfsetlayers{bg,main}  % set the order of the layers (main is the standard layer)
+
+%Background
+\newcommand{\drawbackground}{
+\begin{pgfonlayer}{bg}
+	\ifdefined\BLEEDAREA
+	% background to bleed area
+	\fill[cardbg] (-\BLEEDMARGIN, -\BLEEDMARGIN) rectangle (\CARDWIDTH+\BLEEDMARGIN, \CARDHEIGHT+\BLEEDMARGIN);
+	\fi
+	% background only to cut area
+	\fill[cardbg] (0, 0) rectangle +(\CARDWIDTH, \CARDHEIGHT);
+\end{pgfonlayer}
+	\ifdefined\LINES
+	% guideline - cut area
+	\draw[cardfg] (0, 0) rectangle +(\CARDWIDTH, \CARDHEIGHT);
+	\fi
+	\ifdefined\SAFEAREA
+	% guideline - safe area
+	\draw[red,dashed] (\CARDPADDING, \CARDPADDING) rectangle (\CARDWIDTH - \CARDPADDING, \CARDHEIGHT - \CARDPADDING);
+	\fi
+}
+%Layout elements
+\newcommand{\drawcardicon}{
+	\node (L) [cardfg,above right] at (\CARDPADDING, \CARDHEIGHT - \CARDPADDING) {\cardicon};
+}
+\newcommand{\drawextralogo}[1]{
+	\node (EL) [cardfg,above left] at (\CARDWIDTH - \CARDPADDING, \CARDHEIGHT - \CARDPADDING) {\bodyfont #1};
+}
+\newcommand{\drawbodytext}[1]{
+	\node [cardfg,below right,text width=\CARDWIDTH - 2*\CARDPADDING-\TEXTMARGIN] at (\CARDPADDING, \CARDPADDING+\HEADERHEIGHT) {\bodyfont #1 \par};
+}
+\newcommand{\drawadvice}[1]{
+	\node [cardfg,above left,align=right,text width=\CARDWIDTH - 2*\CARDPADDING-\TEXTMARGIN] at (\CARDWIDTH - \CARDPADDING, \CARDHEIGHT - \CARDPADDING - \FOOTERHEIGHT) {\bodyfont \small #1 \par};
+}
+\newcommand{\drawcardtitle}{
+	\node [cardfg,below right,text width=\CARDWIDTH - 2*\CARDPADDING] at (\CARDPADDING, \CARDPADDING) {\titlefont Cards \\ Against \\ Cryptography\par};
+}
+
+%Cards
+\newcommand{\cardfront}[5]{
+\begin{scope}[shift={(#1,#2)}]
+   \drawbackground
+   \drawcardicon
+   \drawbodytext{#3}
+   \drawadvice{#4}
+   \drawextralogo{#5}
+\end{scope}
+}
+\newcommand{\cardback}[2]{
+\begin{scope}[shift={(#1,#2)}]
+   \drawbackground
+   \drawcardtitle
+\end{scope}
+}

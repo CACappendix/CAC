@@ -1,0 +1,93 @@
+% options:
+%\def\BLEEDAREA{} % put bleed area around image as required for printing at makeplayingcards.com https://www.makeplayingcards.com/dl/booklet-template/us-game-4pp.pdf
+%\def\LINES{} % put lines for cutting
+%\def\SAFEAREA{} % draw safe area for content
+
+\newif\ifwhitecard
+\whitecardtrue
+
+\input{../common}
+
+\renewcommand{\baselinestretch}{0.8}
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
+%Default measures for USCards booklets with bleedmargins for printing at makeplayingcards.com
+%Check before printing!
+\providecommand{\BOOKLETHALFWIDTH}{2.2in}
+\providecommand{\BOOKLETWIDTH}{2*\BOOKLETHALFWIDTH}
+\providecommand{\BOOKLETHEIGHT}{3.43in}
+\providecommand{\BLEEDMARGIN}{0.12in}
+\providecommand{\BOOKLETPADDING}{0.12in}%for safe area
+
+\pgfdeclarelayer{bg}    % declare background layer
+\pgfsetlayers{bg,main}  % set the order of the layers (main is the standard layer)
+
+%Background
+\newcommand{\drawbackground}{
+\begin{pgfonlayer}{bg}
+	\ifdefined\BLEEDAREA
+	% background to bleed area
+	\fill[cardbg] (-\BLEEDMARGIN, -\BLEEDMARGIN) rectangle (\BOOKLETWIDTH+\BLEEDMARGIN, \BOOKLETHEIGHT+\BLEEDMARGIN);
+	\fi
+	% background only to cut area
+	\fill[cardbg] (0, 0) rectangle (\BOOKLETWIDTH, \BOOKLETHEIGHT);
+\end{pgfonlayer}
+	\ifdefined\LINES
+	% guideline - cut area
+	\draw[cardfg,line width=0.1mm] (0,0) rectangle (\BOOKLETWIDTH, \BOOKLETHEIGHT);
+	\draw[cardfg,line width=0.1mm,dashed] (\BOOKLETHALFWIDTH, 0) -- (\BOOKLETHALFWIDTH, \BOOKLETHEIGHT);
+	\fi
+	\ifdefined\SAFEAREA
+	% guideline - safe area
+	\draw[red,dashed] (\BOOKLETPADDING, \BOOKLETPADDING) rectangle (\BOOKLETWIDTH - \BOOKLETPADDING, \BOOKLETHEIGHT - \BOOKLETPADDING);
+	\draw[red,line width=0.1mm,dashed] (\BOOKLETHALFWIDTH-\BOOKLETPADDING, \BOOKLETPADDING) -- (\BOOKLETHALFWIDTH-\BOOKLETPADDING, \BOOKLETHEIGHT-\BOOKLETPADDING);
+	\draw[red,line width=0.1mm,dashed] (\BOOKLETHALFWIDTH+\BOOKLETPADDING, \BOOKLETPADDING) -- (\BOOKLETHALFWIDTH+\BOOKLETPADDING, \BOOKLETHEIGHT-\BOOKLETPADDING);
+	\fi
+}
+
+%Textbox
+\newcommand{\drawbodytext}[4]{
+\begin{scope}[shift={(#1,#2)}]
+	\node [cardfg,below right,text width=#3] at (0,0) {#4};
+\end{scope}
+}
+
+%horizontal line
+\newcommand{\hrline}[1][\BOOKLETHALFWIDTH-3*\BOOKLETPADDING]{%
+\tikz \draw [line width=0.2ex,color=cardfg] (0,0)--+(#1,0);
+}
+
+%title page elements
+\newcommand{\gametitle}{%
+	\node [cardfg,below right,text width=\BOOKLETHALFWIDTH - 2*\BOOKLETPADDING] at (\BOOKLETPADDING, \BOOKLETPADDING) {\booklettitlefont Cards \\ Against \\ Cryptography\par};
+}
+\newcommand{\drawgameicon}{
+	\node (L) [cardfg,above right, text centered] at (\BOOKLETPADDING, \BOOKLETHEIGHT - \BOOKLETPADDING) {\cardicon};
+}
+\newcommand{\drawextralogo}[1]{
+	\node (EL) [cardfg,above left, text centered] at (\BOOKLETHALFWIDTH - \BOOKLETPADDING, \BOOKLETHEIGHT - \BOOKLETPADDING) {\bodyfont #1 \par};
+}
+%title page
+\newcommand{\frontpage}[3]{
+\begin{scope}[shift={(#1,#2)}]
+   \gametitle
+   \drawgameicon
+   \drawextralogo{#3}
+\end{scope}
+}
+
+%Doublepage
+\newenvironment{doublepage}{%
+\noindent
+\ifdefined\FULLPAGE
+\begin{center}
+\fi
+\begin{tikzpicture}[yscale=-1]
+\drawbackground
+}{%
+\end{tikzpicture}
+\ifdefined\FULLPAGE
+\end{center}
+\newpage
+\fi
+}

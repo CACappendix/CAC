@@ -1,0 +1,23 @@
+#text, advice, extra logo
+
+#Appendix B
+"\begin{center}\Huge \$\end{center}","","\appendixB"
+"A buzzword which marketing came up with.","","\appendixB"
+"Blockchain.","\circled{0}","\appendixB"
+"Blockchain.","\circled{1}","\appendixB"
+"Blockchain.","\circled{$\infty$}","\appendixB"
+"Blockchain.","\circled{$\pi$}","\appendixB"
+"Blockchain.","\circled{42}","\appendixB"
+"Blockchain?","","\appendixB"
+"Blockchains.","","\appendixB"
+"Blockchain, Blockchain, Blockchain.","","\appendixB"
+"Blockchain Engineer.","","\appendixB"
+"Cryptomoneya.","","\appendixB"
+"Hiding behind the blockchain.","","\appendixB"
+"Mining Bitcoin.","","\appendixB"
+"Post blockchain cryptography","\emph{also known as MPC}","\appendixB"
+"Proof-of-stake.","","\appendixB"
+"Proof-of-work.","","\appendixB"
+"Using blockchain to build a tiny house.","","\appendixB"
+"Using proof-of-stake to save the climate.","","\appendixB"
+"Using proof-of-work to heat your flat.","","\appendixB"

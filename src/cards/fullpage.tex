@@ -1,0 +1,37 @@
+% options:
+%\def\LETTERPAPER{} % otherwise use A4 paper
+
+\ifdefined\LETTERPAPER
+	\usepackage[letterpaper,margin=0in]{geometry}
+	\newcommand{\CARDWIDTH}{2.2in}
+	\newcommand{\CARDHEIGHT}{3.43in}
+\else
+	\usepackage[a4paper,margin=0mm]{geometry}
+	\newcommand{\CARDWIDTH}{55.88mm}
+	\newcommand{\CARDHEIGHT}{87.12mm}
+\fi
+
+\input{card}
+
+\newenvironment{cardpage}{%
+\topskip0pt
+\vspace*{\fill}
+\noindent
+\begin{center}
+\begin{tikzpicture}[yscale=-1]
+}{%
+\end{tikzpicture}
+\end{center}
+\vspace*{\fill}
+}
+
+\newcommand{\backgroundpage}{%
+\begin{cardpage}
+\foreach \row in {0,...,2} {
+	\foreach \col in {0,...,2} {
+		\cardback{\col*\CARDWIDTH}{\row*\CARDHEIGHT}	
+	}
+}
+\end{cardpage}
+}
+

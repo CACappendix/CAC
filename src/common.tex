@@ -1,0 +1,105 @@
+% one of the following
+%\def\BLACKBACKGROUNDGRAY{} % black cards have light gray background
+%\def\BLACKBACKGROUNDWHITE{} % black cards have white background
+
+%Packages
+\usepackage{microtype}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{verbatimbox}
+% fonts
+\usepackage{ulem}
+\renewcommand{\ULthickness}{1.5pt}
+\usepackage{wasysym}
+\usepackage{fontspec}
+\usepackage{amsfonts,amssymb}
+\usepackage{dsfont}
+\newfontfamily\comicsans{Comic Sans MS}
+\setsansfont{Helvetica}
+
+%version
+\newcommand{\version}{1.0}
+
+% font settings for default text
+%Cards
+\newcommand{\bodyfont}{\sffamily\bfseries\fontsize{12}{18}\selectfont}
+\newcommand{\titlefont}{\sffamily\bfseries\fontsize{20.5}{22}\selectfont}
+%Booklet
+\newcommand{\booklettitlefont}{\sffamily\bfseries\fontsize{20.5}{25}\selectfont}
+\newcommand{\bookletfont}{\sffamily\fontsize{12}{12}\selectfont}
+\newcommand{\bookletfontsmall}{\sffamily\fontsize{8}{8}\selectfont}
+\newcommand{\bookletfonttiny}{\sffamily\fontsize{6}{6}\selectfont}
+
+% prevent hyphenation
+\pretolerance=10000
+\tolerance=2000 
+\emergencystretch=10pt
+
+% color scheme
+\newcommand{\setcolorscheme}{% This macro allows to switch white/black within a document
+\ifwhitecard %Answer card
+	\definecolor{cardbg}{named}{white}
+	\definecolor{cardfg}{named}{black}
+	\definecolor{icondark}{named}{black}
+	\definecolor{iconlight}{named}{white}
+\else %Sentence card
+	\ifdefined\BLACKBACKGROUNDWHITE %White background
+	\definecolor{cardbg}{named}{white}
+	\definecolor{cardfg}{named}{black}
+	\definecolor{icondark}{named}{black}
+	\definecolor{iconlight}{named}{white}
+	\else
+		\ifdefined\BLACKBACKGROUNDGRAY %Gray background
+		\definecolor{cardbg}{rgb}{0.85,0.85,0.85}
+		\definecolor{cardfg}{named}{black}
+		\definecolor{icondark}{named}{black}
+		\definecolor{iconlight}{named}{white}
+		\else %Black background
+		\definecolor{cardbg}{named}{black}%{cmyk}{0.4,0,0,1}
+		\definecolor{cardfg}{named}{white}
+		\definecolor{icondark}{named}{black}
+		\definecolor{iconlight}{named}{white}
+		\fi
+	\fi	
+\fi
+}
+\setcolorscheme
+
+% Layout Elements
+%BLANK
+\newcommand{\BLANK}[1][6ex]{\raisebox{-0.15ex}{{\tikz\draw[line width=0.175ex,color=cardfg] (0,0)--+(#1,0);}}\xspace}
+%Censor
+\newcommand{\CENSOR}[1][8ex]{\raisebox{-0.41ex}{{\tikz\draw[line width=1.81ex,color=cardfg] (0,0)--+(#1,0);}}\xspace}
+%Circles
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]{%
+\node[cardfg,draw=cardfg,shape=circle,inner sep=0.2ex,line width=0.3ex,text width=3ex,align=center] (c) {\bfseries\sffamily#1};
+}}
+\newcommand{\circlef}[1]{\tikz[baseline=(c.base)]{%
+\node[cardbg,fill=cardfg,shape=circle,inner sep=0ex,text width=3ex,align=center] (c) {\bfseries\sffamily#1};
+}}
+%Draw N Command
+\newcommand{\drawN}[1]{PICK \circlef{\large#1}}
+%from https://groups.google.com/forum/?fromgroups=#!topic/comp.text.tex/aaDphoWpbwQ
+\def\bitcoinA{%
+  \leavevmode
+  \vtop{\offinterlineskip %\bfseries
+    \setbox0=\hbox{B}%
+    \setbox2=\hbox to\wd0{\hfil\hskip-.03em
+    \vrule height .3ex width .15ex\hskip .08em
+    \vrule height .3ex width .15ex\hfil}
+    \vbox{\copy2\box0}\box2}}
+%The CAC icon
+\newcommand{\cardicon}{
+	\begin{tikzpicture}[yscale=-1]
+	\draw [color=cardfg,fill=icondark,line width=0.5pt,rotate around={-20:(0.19in,0.105in)}] (0.075in,0.105in) rectangle +(0.19in,0.19in);
+	\draw [color=icondark,fill=iconlight,line width=0.5pt] (0.19in,0.105in) rectangle +(0.19in,0.19in);
+	\draw [color=icondark,fill=iconlight,line width=0.5pt,rotate around={20:(0.19in,0.105in)}] (0.275in,0.073in) rectangle +(0.19in,0.19in);
+	\end{tikzpicture}
+}
+%Appendix logos
+\newcommand{\appendixA}{\raisebox{.4ex}{Appendix} \huge $\mathds{A}$}
+\newcommand{\appendixB}{\raisebox{.4ex}{Appendix} \huge $\bitcoinA$}
+
+
+%CLASSIFIED REMOVE BEFORE PUBLICATION

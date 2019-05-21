@@ -1,0 +1,16 @@
+\documentclass{standalone}
+
+\newif\ifwhitecard
+\whitecardfalse
+
+\input{card}
+
+\newenvironment{cardpage}{%
+\noindent
+\begin{tikzpicture}[yscale=-1]
+}{\end{tikzpicture}}
+\standaloneenv{cardpage}
+
+\begin{document}
+\input{front.data}
+\end{document}

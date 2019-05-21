@@ -1,0 +1,9 @@
+#text, advice, extra logo
+
+#Appendix B
+"What gets better with blockchain? ","","\appendixB"
+"Solve \BLANK using a LEGO\textsuperscript{\textregistered} blockchain.","","\appendixB"
+"I don't want to hear about \BLANK anymore!","","\appendixB"
+"Invest in my ICO! We double your money by \BLANK[8ex]!","","\appendixB"
+"Save the world: \BLANK[10ex].","","\appendixB"
+"\BLANK beats \BLANK.","\drawN{1}","\appendixB""
